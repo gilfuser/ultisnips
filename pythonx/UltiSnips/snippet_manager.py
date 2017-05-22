@@ -150,6 +150,9 @@ class SnippetManager(object):
         before =  '' if searchAll else _vim.buf.line_till_cursor
         snippets = self._snips(before, True)
 
+        dict_definition = []
+        dict_info_definition = []
+
         # Sort snippets alphabetically
         snippets.sort(key=lambda x: x.trigger)
         for snip in snippets:
@@ -167,22 +170,31 @@ class SnippetManager(object):
                         description[0] in "'\""):
                     description = description[1:-1]
 
-            _vim.command(as_unicode(
-                "let g:current_ulti_dict['{key}'] = '{val}'").format(
-                    key=key.replace("'", "''"),
-                    val=description.replace("'", "''")))
+            dict_definition.append("'{key}': '{val}'".format(
+                key=key.replace("'", "''"),
+                val=description.replace("'", "''")
+            ))
 
             if searchAll:
-                _vim.command(as_unicode(
-                    ("let g:current_ulti_dict_info['{key}'] = {{"
-                     "'description': '{description}',"
-                     "'location': '{location}',"
-                     "}}")).format(
-                        key=key.replace("'", "''"),
-                        location=location.replace("'", "''"),
-                        description=description.replace("'", "''")))
+                dict_info_definition.append(("'{key}': {{"
+                    "'description': '{description}',"
+                    "'location': '{location}',"
+                "}}").format(
+                    key=key.replace("'", "''"),
+                    location=location.replace("'", "''"),
+                    description=description.replace("'", "''")
+                ))
 
+        _vim.command(as_unicode(
+            "let g:current_ulti_dict = {" + ','.join(dict_definition) + '}'
+        ))
 
+        if searchAll:
+            _vim.command(as_unicode(
+                "let g:current_ulti_dict_info = {" +
+                ','.join(dict_info_definition) +
+                '}'
+            ))
 
     @err_to_scratch_buffer.wrap
     def list_snippets(self):
@@ -554,7 +566,6 @@ class SnippetManager(object):
                     mode = 'p'
                 # Use remap mode so SuperTab mappings will be invoked.
                 break
-
         if (feedkey == r"\<Plug>SuperTabForward" or
                 feedkey == r"\<Plug>SuperTabBackward"):
             _vim.command('return SuperTab(%s)' % _vim.escape(mode))

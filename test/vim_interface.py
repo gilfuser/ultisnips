@@ -187,6 +187,10 @@ class VimInterfaceTmux(VimInterface):
                                      stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()
         if PYTHON3:
             stdout = stdout.decode('utf-8')
+
+        if stdout.strip() == 'tmux master':
+            return
+
         m = re.match(r"tmux (\d+).(\d+)", stdout)
         if not m or not (int(m.group(1)), int(m.group(2))) >= (1, 8):
             raise RuntimeError(
