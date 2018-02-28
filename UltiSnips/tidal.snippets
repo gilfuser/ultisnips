@@ -60,6 +60,10 @@ snippet ite "iter" i
 iter ${1:4} $$0
 endsnippet
 
+snippet juv "juxBy" i
+juxBy ${1:0.5} (${VISUAL})$0
+endsnippet
+
 snippet jux "juxBy" i
 juxBy ${1:0.5} ($2)$0
 endsnippet
@@ -69,7 +73,7 @@ linger ${1:(1/3)} $ $0
 endsnippet
 
 snippet eve "every" i
-every ${1:4} ${VISUAL} $0
+every ${1:4} ${VISUAL}$$0
 endsnippet
 
 snippet <~> "<~" i
@@ -127,8 +131,8 @@ endsnippet
 
 # SAMPLE TRANSFORMERS
 
-snippet loocho "loopAt+chop"
-loopAt ${1:<3 4>} $ chop ${2:24} $ $0
+snippet loochop "loopAt+chop" i
+loopAt ${1:"<3 4>"} $ chop ${2:24} $ $0
 endsnippet
 
 snippet gap "gap" i
@@ -177,7 +181,7 @@ snippet fol "foldEvery" i
 foldEvery ${1:[3, 5, 7]} (${VISUAL:slow 2}) $
 endsnippet
 
-snippet ma "mask" i
+snippet mas "mask" i
 (mask ("${1:1 ~ 1 1 ~ ~ 1 ~}" :: ))
   (${VISUAL})
   # n (${2: irand 8})
@@ -201,32 +205,31 @@ endsnippet
 
 # COMPOSITIONS
 
-snippet spl "seqPLoop"
+snippet spl "seqPLoop" i
 seqPLoop [
-  (0, $1, $2),
-  ($1, $3, $4)$0
+  (0, 16, ${VISUAL})$0
 ]
 endsnippet
 
-snippet cat "cat"
+snippet cat "cat" i
 cat [
   ${VISUAL},
   $2 $0
 ]
 endsnippet
 
-snippet fac "fastcat"
+snippet fac "fastcat" i
 fastcat [
   $1,
   $2 $0
 ]
 endsnippet
 
-snippet inte "interlace"
+snippet inte "interlace" i
 interlace ($1) ($2)$0
 endsnippet
 
-snippet rac "randcat"
+snippet rac "randcat" i
 randcat [
   $1,
   $2,
@@ -234,80 +237,68 @@ randcat [
 ]
 endsnippet
 
-snippet app "append"
+snippet app "append" i
 append ($1)($2)$0
 endsnippet
 
-snippet sta "stack"
+snippet sta "stack" i
 stack [
-  $1,
-  $2,
-  $3
-] $0
+  ${VISUAL}$0
+] 
 endsnippet
 
 snippet sup "superimpose" i
 superimpose (${1:# up "-3"}) $$0
 endsnippet
 
-snippet wea "weave"
+snippet wea "weave" i
 weave ${1:16} (${2:pan sine})[
-  $1,
-  $2,
-  $3
+${VISUAL}
 ]$0
 endsnippet
 
-snippet wea' "weave'"
-weave' ${1:16} (${2:pan sine})[
-  $1,
-  $2,
-  $3
-]$0
-endsnippet
-
-snippet wed "wedge"
-wedge (${1:1/3}) ($2) ($3) $0
+snippet wed "wedge" i
+wedge (${1:1/3}) (${VISUAL}) (${3:slow 8 $ s "amencutup*32" # n (irand 32)}) $0
 endsnippet
 
 # TRANSITIONS
 
-snippet ant "anticipateIn"
+snippet ant "anticipateIn" i
 t$1 (anticipateIn $2) $ ${VISUAL}
 $0
 endsnippet
 
-snippet clu "clutchIn"
+snippet clu "clutchIn" i
 t$1 (clutchIn) $ ${VISUAL}
 $0
 endsnippet
 
-snippet jui "jumpIn'"
+snippet jui "jumpIn'" i
 t$1 jumpIn' ${VISUAL}
 $0
 endsnippet
 
-snippet jum "jumpMod"
-t$1 jumpMod $$0 ${VISUAL}
+snippet jum "jumpMod" i
+t${1:1} (jumpMod ${2:8}) $$0 ${VISUAL}
 endsnippet
 
-snippet mor "mortal"
+snippet mor "mortal" i
 t$1 mortal $$0 ${VISUAL}
 endsnippet
 
-snippet suw "superwash"
+snippet suw "superwash" i
 t$1 (superwash ($2)($3) $4 $5 $6) $$0 ${VISUAL}
 endsnippet
 
-snippet wai "wait"
+snippet wai "wait" i
 t$1 (wait $2) $ ${VISUAL}
 endsnippet
 
-snippet was "wash"
+snippet was "wash" i
 t$1 (wash (${2:chop8}) ${3:4}) $$0 ${VISUAL}
 endsnippet
 
-snippet xfa "xfadeIn"
+snippet xfa "xfadeIn" i
 t$1 (xfadeIn $2) $$0 ${VISUAL}
 endsnippet
 
@@ -321,19 +312,19 @@ endsnippet
 # bpf $1 # bandf $2 $0
 #endsnippet
 
-snippet beg "begin"
+snippet beg "begin" i
 # begin $1 $0
 endsnippet
 
-snippet coa "coarse"
+snippet coa "coarse" i
 # coarse $0
 endsnippet
 
-snippet cru "crush"
+snippet cru "crush" i
 # crush $0
 endsnippet
 
-snippet cut "cut"
+snippet cut "cut" i
 # cut $1
 endsnippet
 
@@ -341,39 +332,39 @@ endsnippet
 # lpf $1 # lpq ${2:0.25} $0
 #endsnippet
 
-snippet del "delay"
+snippet del "delay" i
 # delay ${1:0.5} # def ${2:0.5} # det ${3:0.25} $0
 endsnippet
 
-snippet end "end"
+snippet end "end" i
 # end $0
 endsnippet
 
-snippet ga "gain"
+snippet ga "gain" i
 # gain $0
 endsnippet
 
-snippet acc "accelerate"
+snippet acc "accelerate" i
 # accelerate "$1" $0
 endsnippet
 
-snippet leg "legato"
+snippet leg "legato" i
 # legato $0
 endsnippet
 
-snippet loop "loop"
+snippet loop "loop" i
 # loop $0
 endsnippet
 
-snippet nud "nudge"
+snippet nud "nudge" i
 # nudge "$1" $0
 endsnippet
 
-snippet pan "pan"
+snippet pan "pan" i
 # pan "$1" $0
 endsnippet
 
-snippet sha "shape"
+snippet sha "shape" i
 # shape ${1:0.25} $0
 endsnippet
 
@@ -382,15 +373,15 @@ snippet up "up" i
 endsnippet
 
 # duration in seconds
-snippet sus "sustain"
+snippet sus "sustain" i
 # sustain $0
 endsnippet
 
-snippet unis "unit + speed" 
+snippet unis "unit + speed" i
 # unit "c" # speed ${1:1} $0
 endsnippet
 
-snippet vow "vowel"
+snippet vow "vowel" i
 # vowel "${1:e a ~ [i o u]}" $0
 endsnippet
 snippet orb "orbit"
@@ -400,31 +391,1269 @@ endsnippet
 
 # SAMPLES
 
-snippet ain "ainv9" i
-ainv9$0
+# slow 6
+snippet alo "bpm110 alonzo7ab 2" i
+alonzo7ab
 endsnippet
 
-snippet bin "binv12" i
+snippet ang "bpm110 angel9a 1" i
+angel9a
+endsnippet
+
+snippet b52 "bpm110 b529a 1" i
+b529a
+endsnippet
+
+snippet bar "bpm110 baruara10b 1" i
+baruara10b
+endsnippet
+
+snippet bba "bpm110 bbass_1a 1" i
+bbass_1a
+endsnippet
+
+snippet bla2 "bpm110 blament6a 3" i
+blament6a
+endsnippet
+
+snippet boo "bpm110 boogie6a 1" i
+boogie6a
+endsnippet
+
+snippet bow "bpm110 bowie4b 1" i
+bowie4b
+endsnippet
+
+snippet bum "bpm110 bumbera4a 1" i
+bumbera4a
+endsnippet
+
+snippet caf "bpm110 cafe6a 2" i
+cafe6a
+endsnippet
+
+snippet cas "bpm110 casaverde9a 1" i
+casaverde9a
+endsnippet
+
+snippet cav "bpm110 cavaco10b 1" i
+cavaco10b
+endsnippet
+
+snippet cav2 "bpm110 cavaco8a 1" i
+cavaco8a
+endsnippet
+
+snippet cax "bpm110 caxixi6a 1" i
+caxixi6a
+endsnippet
+
+snippet cho "bpm110 chorei5a 1" i
+chorei5a
+endsnippet
+
+snippet cor2 "bpm110 corone9a 1" i
+corone9a
+endsnippet
+
+snippet cui "bpm110 cuica4a4a 1" i
+cuica4a4a
+endsnippet
+
+snippet del "bpm110 delasoul11a 1" i
+delasoul11a
+endsnippet
+
+snippet deu "bpm110 deus11a 1" i
+deus11a
+endsnippet
+
+snippet dim "bpm110 dimelo12a 1" i
+dimelo12a
+endsnippet
+
+snippet dis "bpm110 dis7ab 1" i
+dis7ab
+endsnippet
+
+snippet dr_ "bpm110 dr_edit 23" i
+dr_edit
+endsnippet
+
+snippet eas "bpm110 easiest6a 1" i
+easiest6a
+endsnippet
+
+snippet emb "bpm110 embolada7ab 1" i
+embolada7ab
+endsnippet
+
+snippet eth "bpm110 ethiot_1a 1" i
+ethiot_1a
+endsnippet
+
+snippet ethp "bpm110 ethiperc4a 1" i
+ethiperc4a
+endsnippet
+
+snippet eths "bpm110 ethisopros4a 1" i
+ethisopros4a
+endsnippet
+
+snippet eti "bpm110 etio5a 1" i
+etio5a
+endsnippet
+
+snippet exu "bpm110 exu9a 1" i
+exu9a
+endsnippet
+
+snippet fal "bpm110 falas 2" i
+falas
+endsnippet
+
+snippet fla "bpm110 flautaviola2b 1" i
+flautaviola2b
+endsnippet
+
+snippet gli "bpm110 glitch4a 1" i
+glitch4a
+endsnippet
+
+snippet guit "bpm110 guitaiao9a 1" i
+guitaiao9a
+endsnippet
+
+snippet guij "bpm110 guitajazz3a 1" i
+guitajazz3a
+endsnippet
+
+snippet hav "bpm110 havens10b 1" i
+havens10b
+endsnippet
+
+snippet hey "bpm110 hey11a 1" i
+hey11a
+endsnippet
+
+snippet hip "bpm110 hiphop2a 1" i
+hiphop2a
+endsnippet
+
+snippet ita "bpm110 itamar12a 1" i
+itamar12a
+endsnippet
+
+snippet jan "bpm110 janis7ab 1" i
+janis7ab
+endsnippet
+
+snippet jaz "bpm110 jazzclima4a 1" i
+jazzclima4a
+endsnippet
+
+snippet jim "bpm110 jimi9a 1" i
+jimi9a
+endsnippet
+
+snippet led "bpm110 led2a 2" i
+led2a
+endsnippet
+
+snippet led2 "bpm110 led9a9a 2" i
+led9a9a
+endsnippet
+
+snippet len "bpm110 lenalennie8a 1" i
+lenalennie8a
+endsnippet
+
+snippet loo "bpm110 loony9a 1" i
+loony9a
+endsnippet
+
+snippet lug "bpm110 lugar9a 1" i
+lugar9a
+endsnippet
+
+snippet lun "bpm110 lunar8a 2" i
+lunar8a
+endsnippet
+
+snippet mac "bpm110 machine11a 1" i
+machine11a
+endsnippet
+
+snippet mal "bpm110 malvado4a 1" i
+malvado4a
+endsnippet
+
+snippet mar "bpm110 marimba8a 1" i
+marimba8a
+endsnippet
+
+snippet moa "bpm110 moaning6a 1" i
+moaning6a
+endsnippet
+
+snippet moj "bpm110 mojo9a 1" i
+mojo9a
+endsnippet
+
+snippet ner "bpm110 nereci8a 3" i
+nereci8a
+endsnippet
+
+snippet noc "bpm110 nochaser3a 1" i
+nochaser3a
+endsnippet
+
+snippet par "bpm110 paranga1a 2" i
+paranga1a
+endsnippet
+
+snippet rob "bpm110 robotjazz4a 1" i
+robotjazz4a
+endsnippet
+
+snippet sam "bpm110 sambasic1b 1" i
+sambasic1b
+endsnippet
+
+snippet sep "bpm110 sep138a 3" i
+sep138a
+endsnippet
+
+snippet sep "bpm110 sep13drum8a 1" i
+sep13drum8a
+endsnippet
+
+snippet sex "bpm110 sexysax5a 1" i
+sexysax5a
+endsnippet
+
+snippet sil "bpm110 siliga5a 1" i
+siliga5a
+endsnippet
+
+snippet sog "bpm110 softguitar5a 1" i
+softguitar5a
+endsnippet
+
+snippet sop "bpm110 softpiano12a 1" i
+softpiano12a
+endsnippet
+
+snippet sou "bpm110 soulburst12a 1" i
+soulburst12a
+endsnippet
+
+snippet sou2 "bpm110 soulburst1a 1" i
+soulburst1a
+endsnippet
+
+snippet sou3 "bpm110 soulburst3b 1" i
+soulburst3b
+endsnippet
+
+snippet spi "bpm110 spid10b 1" i
+spid10b
+endsnippet
+
+snippet sto "bpm110 storm5a 1" i
+storm5a
+endsnippet
+
+snippet the "bpm110 thelonius7ab 1" i
+thelonius7ab
+endsnippet
+
+snippet thi "bpm110 this04a 1" i
+this04a
+endsnippet
+
+snippet toc "bpm110 toctoc9a 1" i
+toctoc9a
+endsnippet
+
+snippet tre "bpm110 tremdas11x3b 1" i
+tremdas11x3b
+endsnippet
+
+snippet tro "bpm110 trombos9a 1" i
+trombos9a
+endsnippet
+
+snippet uno "bpm110 unodos 1" i
+unodos
+endsnippet
+
+snippet vio "bpm110 violoutro1b 1" i
+violoutro1b
+endsnippet
+
+snippet kif "drumset kif-9a-d 16" i
+kif-9a-d
+endsnippet
+
+snippet kip "drumset kip-10a-g 16" i
+kip-10a-g
+endsnippet
+
+snippet pec "drumset pec-3b 10" i
+pec-3b
+endsnippet
+
+snippet peo "drumset peo-12a-e 5" i
+peo-12a-e
+endsnippet
+
+snippet ric "drumset ric-6a 9" i
+ric-6a
+endsnippet
+
+snippet rie "drumset rie 10" i
+rie
+endsnippet
+
+snippet rim "drumset rims 16" i
+rims
+endsnippet
+
+snippet rimu "drumset rimu 16" i
+rimu
+endsnippet
+
+snippet sn2 "drumset snc 16" i
+snc
+endsnippet
+
+snippet sne "drumset sne 15" i
+sne
+endsnippet
+
+snippet stk "drumset stk 16" i
+stk
+endsnippet
+
+snippet tof "drumset tof 16" i
+tof
+endsnippet
+
+snippet to "drumset toh 16" i
+toh
+endsnippet
+
+snippet ain "invocation ainv9 9" i
+ainv9
+endsnippet
+
+snippet bin "invocation binv12 12" i
 binv12
 endsnippet
 
-snippet cin "cinv24" i
+snippet cin "invocation cinv24 24" i
 cinv24
 endsnippet
 
-snippet din "dinv4" i
+snippet din "invocation dinv4 4" i
 dinv4
 endsnippet
 
-snippet ein "einv8" i
+snippet ein "invocation einv8 8" i
 einv8
 endsnippet
 
-snippet fin "finv12" i
+snippet fin "invocation finv12 12" i
 finv12
 endsnippet
 
-snippet gin "ginv24" i
+snippet gin "invocation ginv24 24" i
 ginv24
+endsnippet
+
+snippet 11m "skmecs 11m2012 24" i
+11m2012
+endsnippet
+
+snippet bar2 "skmecs baru3m210t 10" i
+baru3m210t
+endsnippet
+
+snippet bas "skmecs basa9m48 32" i
+basa9m48
+endsnippet
+
+snippet bas2 "skmecs bass3m22 4" i
+bass3m22
+endsnippet
+
+snippet bas3 "skmecs bass6d 45" i
+bass6d
+endsnippet
+
+snippet bow "skmecs bowie8m22 4" i
+bowie8m22
+endsnippet
+
+snippet br3 "skmecs br3m 12" i
+br3m
+endsnippet
+
+snippet bum2 "skmecs bumbo 1" i
+bumbo
+endsnippet
+
+snippet buz "skmecs buzinas17 7" i
+buzinas17
+endsnippet
+
+snippet cas "skmecs casa5m23 6" i
+casa5m23
+endsnippet
+
+snippet cas2 "skmecs casav5m23 6" i
+casav5m23
+endsnippet
+
+snippet cav "skmecs cavaco1d42 8" i
+cavaco1d42
+endsnippet
+
+snippet cax2 "skmecs caxixi13 3" i
+caxixi13
+endsnippet
+
+snippet che "skmecs che10m6 6" i
+che10m6
+endsnippet
+
+snippet cho2 "skmecs cho10m44 16" i
+cho10m44
+endsnippet
+
+snippet cla "skmecs cla11m1 2" i
+cla11m1
+endsnippet
+
+snippet cla2 "skmecs cla11m21 2" i
+cla11m21
+endsnippet
+
+snippet cla3 "skmecs cla11m41 4" i
+cla11m41
+endsnippet
+
+snippet cla4 "skmecs cla11m81 8" i
+cla11m81
+endsnippet
+
+snippet cla5 "skmecs clas11m21 2" i
+clas11m21
+endsnippet
+
+snippet coc "skmecs cocker3m24 16" i
+cocker3m24
+endsnippet
+
+snippet cor "skmecs corone2m22 4" i
+corone2m22
+endsnippet
+
+snippet dae "skmecs dae 18" i
+dae
+endsnippet
+
+snippet del "skmecs delas8m24 8" i
+delas8m24
+endsnippet
+
+snippet deo "skmecs deo2m 23" i
+deo2m
+endsnippet
+
+snippet deob "skmecs deob 36" i
+deob
+endsnippet
+
+snippet deod "skmecs deodra 8" i
+deodra
+endsnippet
+
+snippet deou "skmecs deodru 9" i
+deodru
+endsnippet
+
+snippet dim "skmecs dimelo3m42 8" i
+dimelo3m42
+endsnippet
+
+snippet dja "skmecs djav1m25 10" i
+djav1m25
+endsnippet
+
+snippet djak "skmecs djavk1 16" i
+djavk1
+endsnippet
+
+snippet ele "skmecs elev10m0510 5" i
+elev10m0510
+endsnippet
+
+snippet emb "skmecs embo44d 8" i
+embo44d
+endsnippet
+
+snippet emb2 "skmecs embol84 32" i
+embol84
+endsnippet
+
+snippet eth9 "skmecs ethi9m46 24" i
+ethi9m46
+endsnippet
+
+snippet eth1 "skmecs ethio1d1 1" i
+ethio1d1
+endsnippet
+
+snippet eth8 "skmecs ethio8m12 2" i
+ethio8m12
+endsnippet
+
+snippet eth9 "skmecs ethis9m83 24" i
+ethis9m83
+endsnippet
+
+snippet fal "skmecs falas 2" i
+falas
+endsnippet
+
+snippet g12 "skmecs g12m42 8" i
+g12m42
+endsnippet
+
+snippet go1 "skmecs go10m41 4" i
+go10m41
+endsnippet
+
+snippet gui "skmecs gui6d1 1" i
+gui6d1
+endsnippet
+
+snippet gui6 "skmecs gui6d23 6" i
+gui6d23
+endsnippet
+
+snippet gui8 "skmecs gui8d45 20" i
+gui8d45
+endsnippet
+
+snippet gui4 "skmecs guita42 8" i
+guita42
+endsnippet
+
+snippet hip "skmecs hipb9m42f 8" i
+hipb9m42f
+endsnippet
+
+snippet hip2 "skmecs hipb9m42sf 8" i
+hipb9m42sf
+endsnippet
+
+snippet hip3 "skmecs hipbip9m24 8" i
+hipbip9m24
+endsnippet
+
+snippet ita5 "skmecs ita5m216 32" i
+ita5m216
+endsnippet
+
+snippet ja1 "skmecs ja1m22 4" i
+ja1m22
+endsnippet
+
+snippet ja12 "skmecs ja1m24 8" i
+ja1m24
+endsnippet
+
+snippet ja13 "skmecs ja1m42 8" i
+ja1m42
+endsnippet
+
+snippet jan "skmecs janis11m22 4" i
+janis11m22
+endsnippet
+
+snippet jaz "skmecs jaz10m12 2" i
+jaz10m12
+endsnippet
+
+snippet jaz2 "skmecs jaz10m22 4" i
+jaz10m22
+endsnippet
+
+snippet laz3 "skmecs lazi1m4 4" i
+lazi1m4
+endsnippet
+
+snippet led3 "skmecs led1m11 1" i
+led1m11
+endsnippet
+
+snippet led4 "skmecs led1m41 4" i
+led1m41
+endsnippet
+
+snippet led4 "skmecs ledk42 8" i
+ledk42
+endsnippet
+
+snippet led9 "skmecs ledv9m28 16" i
+ledv9m28
+endsnippet
+
+snippet leu "skmecs leute 7" i
+leute
+endsnippet
+
+snippet lig "skmecs liga42 8" i
+liga42
+endsnippet
+
+snippet lun "skmecs luna8m21 2" i
+luna8m21
+endsnippet
+
+snippet lun2 "skmecs luna8m26 24" i
+luna8m26
+endsnippet
+
+snippet mac "skmecs machine11m14t 1" i
+machine11m14t
+endsnippet
+
+snippet mal "skmecs malv1m5t 5" i
+malv1m5t
+endsnippet
+
+snippet malv "skmecs malvc 6" i
+malvc
+endsnippet
+
+snippet mes "skmecs mes2m46 24" i
+mes2m46
+endsnippet
+
+snippet p44 "skmecs p44 16" i
+p44
+endsnippet
+
+snippet par "skmecs para6m18 8" i
+para6m18
+endsnippet
+
+snippet pe6 "skmecs pe6d1 1" i
+pe6d1
+endsnippet
+
+snippet per "skmecs per5d24 24" i
+per5d24
+endsnippet
+
+snippet per2 "skmecs perc42 8" i
+perc42
+endsnippet
+
+snippet pia8 "skmecs pian8d33t 9" i
+pian8d33t
+endsnippet
+
+snippet pia6 "skmecs piande6m25 10" i
+piande6m25
+endsnippet
+
+snippet pia "skmecs piandi6m42 8" i
+piandi6m42
+endsnippet
+
+snippet pli "skmecs plist 1" i
+plist
+endsnippet
+
+snippet roc "skmecs rock2m28 16" i
+rock2m28
+endsnippet
+
+snippet sam "skmecs samba1d162 32" i
+samba1d162
+endsnippet
+
+snippet sin "skmecs sininho 1" i
+sininho
+endsnippet
+
+snippet sop "skmecs sop10m22 4" i
+sop10m22
+endsnippet
+
+snippet sop2 "skmecs sop10m44 9" i
+sop10m44
+endsnippet
+
+snippet spe "skmecs speed12m7_15 16" i
+speed12m7_15
+endsnippet
+
+snippet tam "skmecs tam4m18 8" i
+tam4m18
+endsnippet
+
+snippet tam2 "skmecs tamb 21" i
+tamb
+endsnippet
+
+snippet toa "skmecs toada7m 1" i
+toada7m
+endsnippet
+
+snippet toa2 "skmecs toada7m618 108" i
+toada7m618
+endsnippet
+
+snippet toc "skmecs toctoc5d28 16" i
+toctoc5d28
+endsnippet
+
+snippet tra "skmecs tra9m26 12" i
+tra9m26
+endsnippet
+
+snippet tre "skmecs trem6m18 8" i
+trem6m18
+endsnippet
+
+snippet tre2 "skmecs trem6m48 32" i
+trem6m48
+endsnippet
+
+snippet tro "skmecs tro9m44 16" i
+tro9m44
+endsnippet
+
+snippet tro2 "skmecs tro9m84 32" i
+tro9m84
+endsnippet
+
+snippet tro3 "skmecs tromb14 1" i
+tromb14
+endsnippet
+
+snippet umb "skmecs umb4d 10" i
+umb4d
+endsnippet
+
+snippet umb2 "skmecs umbper15 5" i
+umbper15
+endsnippet
+
+snippet umv "skmecs umvope 8" i
+umvope
+endsnippet
+
+snippet uno "skmecs unodos22 4" i
+unodos22
+endsnippet
+
+snippet ver "skmecs verk 6" i
+verk
+endsnippet
+
+snippet vio "skmecs viola9m13 3" i
+viola9m13
+endsnippet
+
+snippet vio2 "skmecs violong 1" i
+violong
+endsnippet
+
+snippet wah "skmecs wahiao3_15 3" i
+wahiao3_15
+endsnippet
+
+snippet zuh "skmecs zuhause 16" i
+zuhause
+endsnippet
+
+
+snippet bd8 "808 bd 25" i
+bd
+endsnippet
+
+snippet cb8 "808 cb 1" i
+cb
+endsnippet
+
+snippet ch8 "808 ch 1" i
+ch
+endsnippet
+
+snippet cl8 "808 cl 1" i
+cl
+endsnippet
+
+snippet cp8 "808 cp 1" i
+cp
+endsnippet
+
+snippet cy8 "808 cy 25" i
+cy
+endsnippet
+
+snippet hc8 "808 hc 5" i
+hc
+endsnippet
+
+snippet ht8 "808 ht 5" i
+ht
+endsnippet
+
+snippet lc8 "808 lc 5" i
+lc
+endsnippet
+
+snippet lt8 "808 lt 5" i
+lt
+endsnippet
+
+snippet ma8 "808 ma 1" i
+ma
+endsnippet
+
+snippet mc8 "808 mc 5" i
+mc
+endsnippet
+
+snippet mt8 "808 mt 5" i
+mt
+endsnippet
+
+snippet oh8 "808 oh 5" i
+oh
+endsnippet
+
+snippet rs8 "808 rs 1" i
+rs
+endsnippet
+
+snippet sd8 "808 sd 25" i
+sd
+endsnippet
+
+snippet 80b "DirtSamplesEdit 808bd 25" i
+808bd
+endsnippet
+
+snippet 8cy "DirtSamplesEdit 808cy 25" i
+808cy
+endsnippet
+
+snippet 8lt "DirtSamplesEdit 808lt 5" i
+808lt
+endsnippet
+
+snippet 8mt "DirtSamplesEdit 808mt 5" i
+808mt
+endsnippet
+
+snippet 8oh "DirtSamplesEdit 808oh 5" i
+808oh
+endsnippet
+
+snippet 8sd "DirtSamplesEdit 808sd 25" i
+808sd
+endsnippet
+
+snippet 909 "DirtSamplesEdit 909 1" i
+909
+endsnippet
+
+snippet ade "DirtSamplesEdit ade 10" i
+ade
+endsnippet
+
+snippet ale "DirtSamplesEdit alex 2" i
+alex
+endsnippet
+
+snippet ame "DirtSamplesEdit amencutup 32" i
+amencutup
+endsnippet
+
+snippet arp "DirtSamplesEdit arpy 11" i
+arpy
+endsnippet
+
+snippet aut "DirtSamplesEdit auto 11" i
+auto
+endsnippet
+
+snippet bas "DirtSamplesEdit bass 4" i
+bass
+endsnippet
+
+snippet bas "DirtSamplesEdit bass3 12" i
+bass3
+endsnippet
+
+snippet bas "DirtSamplesEdit bassdm 25" i
+bassdm
+endsnippet
+
+snippet bd "DirtSamplesEdit bd 24" i
+bd
+endsnippet
+
+snippet ben "DirtSamplesEdit bend 4" i
+bend
+endsnippet
+
+snippet bin "DirtSamplesEdit bin 2" i
+bin
+endsnippet
+
+snippet ble "DirtSamplesEdit bleep 13" i
+bleep
+endsnippet
+
+snippet bli "DirtSamplesEdit blip 2" i
+blip
+endsnippet
+
+snippet bot "DirtSamplesEdit bottle 13" i
+bottle
+endsnippet
+
+snippet can "DirtSamplesEdit can 14" i
+can
+endsnippet
+
+snippet cas "DirtSamplesEdit casio 3" i
+casio
+endsnippet
+
+snippet cb "DirtSamplesEdit cb 1" i
+cb
+endsnippet
+
+snippet cc "DirtSamplesEdit cc 6" i
+cc
+endsnippet
+
+snippet chi "DirtSamplesEdit chin 4" i
+chin
+endsnippet
+
+snippet chi "DirtSamplesEdit chink 1" i
+chink
+endsnippet
+
+snippet con "DirtSamplesEdit control 2" i
+control
+endsnippet
+
+snippet cp "DirtSamplesEdit cp 2" i
+cp
+endsnippet
+
+snippet cr "DirtSamplesEdit cr 6" i
+cr
+endsnippet
+
+snippet d "DirtSamplesEdit d 4" i
+d
+endsnippet
+
+snippet db "DirtSamplesEdit db 13" i
+db
+endsnippet
+
+snippet dr "DirtSamplesEdit dr 42" i
+dr
+endsnippet
+
+snippet dr2 "DirtSamplesEdit dr2 6" i
+dr2
+endsnippet
+
+snippet dr5 "DirtSamplesEdit dr55 4" i
+dr55
+endsnippet
+
+snippet dr_ "DirtSamplesEdit dr_few 8" i
+dr_few
+endsnippet
+
+snippet dru "DirtSamplesEdit drum 6" i
+drum
+endsnippet
+
+snippet dru "DirtSamplesEdit drumtraks 13" i
+drumtraks
+endsnippet
+
+snippet eee "DirtSamplesEdit e 8" i
+e
+endsnippet
+
+snippet eas "DirtSamplesEdit east 9" i
+east
+endsnippet
+
+snippet fee "DirtSamplesEdit feel 7" i
+feel
+endsnippet
+
+snippet fee "DirtSamplesEdit feelfx 8" i
+feelfx
+endsnippet
+
+snippet fli "DirtSamplesEdit flick 17" i
+flick
+endsnippet
+
+snippet fm "DirtSamplesEdit fm 17" i
+fm
+endsnippet
+
+snippet foo "DirtSamplesEdit foo 28" i
+foo
+endsnippet
+
+snippet fut "DirtSamplesEdit future 17" i
+future
+endsnippet
+
+snippet gla "DirtSamplesEdit glasstap 3" i
+glasstap
+endsnippet
+
+snippet gli "DirtSamplesEdit glitch 8" i
+glitch
+endsnippet
+
+snippet gre "DirtSamplesEdit gretsch 24" i
+gretsch
+endsnippet
+
+snippet haw "DirtSamplesEdit haw 6" i
+haw
+endsnippet
+
+snippet hc "DirtSamplesEdit hc 6" i
+hc
+endsnippet
+
+snippet hh "DirtSamplesEdit hh 13" i
+hh
+endsnippet
+
+snippet hh2 "DirtSamplesEdit hh27 13" i
+hh27
+endsnippet
+
+snippet hit "DirtSamplesEdit hit 6" i
+hit
+endsnippet
+
+snippet ho "DirtSamplesEdit ho 6" i
+ho
+endsnippet
+
+snippet hoo "DirtSamplesEdit hoover 6" i
+hoover
+endsnippet
+
+snippet hou "DirtSamplesEdit house 8" i
+house
+endsnippet
+
+snippet ht "DirtSamplesEdit ht 16" i
+ht
+endsnippet
+
+snippet ind "DirtSamplesEdit industrial 32" i
+industrial
+endsnippet
+
+snippet inv "DirtSamplesEdit invaders 18" i
+invaders
+endsnippet
+
+snippet jaz "DirtSamplesEdit jazz 8" i
+jazz
+endsnippet
+
+snippet jub "DirtSamplesEdit jungbass 20" i
+jungbass
+endsnippet
+
+snippet jun "DirtSamplesEdit jungle 13" i
+jungle
+endsnippet
+
+snippet jvb "DirtSamplesEdit jvbass 13" i
+jvbass
+endsnippet
+
+snippet kic "DirtSamplesEdit kicklinn 1" i
+kicklinn
+endsnippet
+
+snippet kur "DirtSamplesEdit kurt 7" i
+kurt
+endsnippet
+
+snippet lat "DirtSamplesEdit latibro 8" i
+latibro
+endsnippet
+
+snippet les "DirtSamplesEdit less 4" i
+less
+endsnippet
+
+snippet lin "DirtSamplesEdit linnhats 6" i
+linnhats
+endsnippet
+
+snippet lt "DirtSamplesEdit lt 16" i
+lt
+endsnippet
+
+snippet min "DirtSamplesEdit miniyeah 4" i
+miniyeah
+endsnippet
+
+snippet mt "DirtSamplesEdit mt 16" i
+mt
+endsnippet
+
+snippet mut "DirtSamplesEdit mute 28" i
+mute
+endsnippet
+
+snippet not "DirtSamplesEdit notes 15" i
+notes
+endsnippet
+
+snippet oc "DirtSamplesEdit oc 4" i
+oc
+endsnippet
+
+snippet odx "DirtSamplesEdit odx 15" i
+odx
+endsnippet
+
+snippet per "DirtSamplesEdit peri 15" i
+peri
+endsnippet
+
+snippet plu "DirtSamplesEdit pluck 17" i
+pluck
+endsnippet
+
+snippet pop "DirtSamplesEdit popkick 10" i
+popkick
+endsnippet
+
+snippet pri "DirtSamplesEdit print 11" i
+print
+endsnippet
+
+snippet psr "DirtSamplesEdit psr 30" i
+psr
+endsnippet
+
+snippet rea "DirtSamplesEdit realclaps 4" i
+realclaps
+endsnippet
+
+snippet res "DirtSamplesEdit rest 1" i
+rest
+endsnippet
+
+snippet rm "DirtSamplesEdit rm 2" i
+rm
+endsnippet
+
+snippet rs "DirtSamplesEdit rs 1" i
+rs
+endsnippet
+
+snippet sax "DirtSamplesEdit sax 22" i
+sax
+endsnippet
+
+snippet sd "DirtSamplesEdit sd 2" i
+sd
+endsnippet
+
+snippet seq "DirtSamplesEdit sequential 8" i
+sequential
+endsnippet
+
+snippet sf "DirtSamplesEdit sf 18" i
+sf
+endsnippet
+
+snippet sid "DirtSamplesEdit sid 12" i
+sid
+endsnippet
+
+snippet sit "DirtSamplesEdit sitar 8" i
+sitar
+endsnippet
+
+snippet sn2 "DirtSamplesEdit sn 52" i
+sn
+endsnippet
+
+snippet sta "DirtSamplesEdit stab 23" i
+stab
+endsnippet
+
+snippet sto "DirtSamplesEdit stomp 10" i
+stomp
+endsnippet
+
+snippet sub "DirtSamplesEdit subroc3d 11" i
+subroc3d
+endsnippet
+
+snippet tab "DirtSamplesEdit tabla 26" i
+tabla
+endsnippet
+
+snippet tab2 "DirtSamplesEdit tabla2 48" i
+tabla2
+endsnippet
+
+snippet tok "DirtSamplesEdit tok 4" i
+tok
+endsnippet
+
+snippet tru "DirtSamplesEdit trump 11" i
+trump
+endsnippet
+
+snippet v "DirtSamplesEdit v 6" i
+v
+endsnippet
+
+snippet wob "DirtSamplesEdit wobble 1" i
+wobble
+endsnippet
+
+snippet yea "DirtSamplesEdit yeah 31" i
+yeah
 endsnippet
 
